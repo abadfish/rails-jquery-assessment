@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>RailsJqueryAssessment</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>World Macro</title>
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
 
-<%= yield %>
-
-</body>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    
+    <%= csrf_meta_tags %>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+    <style>
+      @import 'https://fonts.googleapis.com/css?family=Audiowide';
+      </style>
+  </head>
+  <div id="container">
+    <body>
+      <div class="fintimes">
+        <div class="wrapper clearfix">
+          <%= render partial: 'layouts/header' %>
+          <%= yield %>
+        </div>
+      </div>
+    </body>
+  </div>
+  <%= render partial: 'layouts/footer' %>
 </html>

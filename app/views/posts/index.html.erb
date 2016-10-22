@@ -1,0 +1,25 @@
+<div class="wrapper clearfix">
+
+  <section class="col-md-4 first" id="news">
+    Top Headlines from: <br />
+    <%= render partial: '/news/news', local: {current: @current} %>
+  </section>
+
+  <section class="col-md-8">
+    <div class="post-spacer">
+
+      <div id="posts">
+        <%= render partial: 'form', locals: {post: @post} %>
+      </div>
+      <br />
+        <% @posts.each do |post| %>
+        <div class="col-md-12">
+          <h4 id="posts"><%= link_to post.title, post_path(post) %></h4>
+
+          <h5><%= post.content %><br>
+          <%= post.post_date %></h5><br />
+        </div>
+        <% end %>
+    </div>
+  </section>
+</div>
