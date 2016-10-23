@@ -1,9 +1,5 @@
 class PostsController < ApplicationController
 
-  def show
-    @post = Post.find(params[:id])
-    @posts = Post.all
-  end
 
   def index
     @posts = Post.order(post_date: :desc)
@@ -23,8 +19,19 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.create(post_params)
+    @author = Author.find_or_create_by_name(author_name)
     redirect_to root_path
   end
+
+  def show
+    @posts = Post.all
+    @post = Post.find(params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @post }
+    end
+  end
+
 
   def edit
     @post = Post.find(params[:id])
@@ -39,7 +46,7 @@ class PostsController < ApplicationController
   def post_data
     post = Post.find(params[:id])
     #render json: PostSerializer.serialize(post)
-    render json: post.to_json(only: [:title, :description, :id],
+    render json: post.to_json(only: [:title, :content, :id],
                               include: [author: { only: [:name]}])
   end
 

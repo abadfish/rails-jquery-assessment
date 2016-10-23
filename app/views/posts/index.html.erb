@@ -12,14 +12,22 @@
         <%= render partial: 'form', locals: {post: @post} %>
       </div>
       <br />
-        <% @posts.each do |post| %>
-        <div class="col-md-12">
-          <h4 id="posts"><%= link_to post.title, post_path(post) %></h4>
 
-          <h5><%= post.content %><br>
-          <%= post.post_date %></h5><br />
-        </div>
+        <% @posts.each do |post| %>
+          <%= render partial: "post", locals: {post: post} %><br />
         <% end %>
+
     </div>
   </section>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $(".js-more").on('click', function() {
+    var id = $(this).data("id");
+    $.get("/posts/" + id + "/post_data", function(data) {
+      $("#body-" + id).html(data["content"]);
+    });
+  });
+});
+</script>

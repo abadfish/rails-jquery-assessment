@@ -1,0 +1,6 @@
+<h4 id="posts"><%= post.id %>: <%= link_to post.title, post_path(post) %></h4>
+
+<div id="body-<%= post.id %>"><%= truncate post.content %></div>
+<br />
+<button class="js-more btn" data-id="<%= post.id %>">More...</button>
+<br />
