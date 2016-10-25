@@ -1,0 +1,18 @@
+<div class="col-md-8 ml20">
+  <h1>All Authors</h1>
+  <% @authors.each.with_index(1) do |author, i| %>
+    <%= render partial: "author", locals: {author: author, i: i} %>
+  <% end %>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $(".js-more").on('click', function() {
+    var id = $(this).data("id");
+    $.get("/authors/" + id + "/author_data", function(data) {
+      // Replace text of body-id div
+      $("#body-" + id).html(data["post.title"]);
+    });
+  });
+});
+</script>

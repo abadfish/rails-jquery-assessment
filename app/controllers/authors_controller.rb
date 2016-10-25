@@ -20,6 +20,11 @@ class AuthorsController < ApplicationController
     end
   end
 
+  def author_data
+    author = Author.find(params[:id])
+    render json: author.to_json(only: [:name, :hometown, :id], include: [posts: {only: [:title, :content]}])
+  end
+
   def edit
     @author = Author.find(params[:id])
   end
@@ -40,6 +45,6 @@ class AuthorsController < ApplicationController
   private
 
   def author_params
-    params.require(:author).permit(:name, :hometown)
+    params.require(:author).permit(:name)
   end
 end

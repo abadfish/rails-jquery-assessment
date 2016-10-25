@@ -19,7 +19,6 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.create(post_params)
-    @author = Author.find_or_create_by_name(author_name)
     redirect_to root_path
   end
 
@@ -62,6 +61,6 @@ class PostsController < ApplicationController
   private
 
   def post_params(*args)
-    params.require(:post).permit(:title, :content, :post_date, :author_id)
+    params.require(:post).permit(:title, :content, :post_date, :author_name)
   end
 end
