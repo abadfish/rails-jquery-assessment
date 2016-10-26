@@ -30,9 +30,35 @@
       });
     });
     </script>
+    <div class="col-md-5">
+    <%= render partial: 'comments/form', locals: {post: @post} %>
+      <br />
+      <div id="commentResult">
+        <p id="commentBody"></p>
+      </div>
+    </div>
+
+    <script type="text/javascript" charset="utf8">
+      $(function () {
+        $('form').submit(function(event) {
+          event.preventDefault();
+
+          var values = $(this).serialize();
+
+          var commenting = $.post('/comments', values);
+
+          commenting.done(function(data) {
+            var comment = data["content"];
+
+            $("#commentBody").text(comment);
+          });
+        });
+      });
+    </script>
 
 
   </div>
+
 
   <div class="col-1">
     <br />

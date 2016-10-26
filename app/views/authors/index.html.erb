@@ -1,17 +1,26 @@
 <div class="col-md-8 ml20">
   <h1>All Authors</h1>
   <% @authors.each.with_index(1) do |author, i| %>
-    <%= render partial: "author", locals: {author: author, i: i} %>
+    <h3><%= i %>. Name: <%= author.name %></h3>
+
+    <% author.posts.each do |post| %>
+
+    <button class="js-show btn" data-id="<%= post.id %>">See Posts By <%= author.name %></button>
+
+      <h4 id="postTitle-<%= post.id %>"></h4>
+      <p id="postContent-<%= post.id %>"></p>
+
+    <% end %>
   <% end %>
 </div>
 
 <script type="text/javascript" charset="utf-8">
 $(function () {
-  $(".js-more").on('click', function() {
+  $(".js-show").on('click', function() {
     var id = $(this).data("id");
-    $.get("/authors/" + id + "/author_data", function(data) {
-      // Replace text of body-id div
-      $("#body-" + id).html(data["post.title"]);
+    $.get("/posts/" + id + "/post_data", function(data) {
+      $("#postTitle-" + id).html(data["title"]);
+      $("#postContent-" + id).html(data["content"]);
     });
   });
 });

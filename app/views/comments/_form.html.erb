@@ -1,0 +1,11 @@
+
+  <%= form_for :comment, url: '/comments' do |f| %>
+  <%= f.hidden_field :post_id, :value => @post.id %>
+
+    <h4><%= f.label "Leave a comment:" %></h4>
+    <%= f.text_area :content %>
+    <div class="actions">
+      <%= f.submit "Submit "%>
+    </div>
+
+  <% end %>

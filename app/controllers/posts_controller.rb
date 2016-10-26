@@ -15,6 +15,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.comments.build()
   end
 
   def create
@@ -44,9 +45,8 @@ class PostsController < ApplicationController
 
   def post_data
     post = Post.find(params[:id])
-    #render json: PostSerializer.serialize(post)
     render json: post.to_json(only: [:title, :content, :id],
-                              include: [author: { only: [:name]}])
+                              include: [author: { only: [:name]}], include: [comments: { only: [:content]}])
   end
 
   def destroy
@@ -61,6 +61,6 @@ class PostsController < ApplicationController
   private
 
   def post_params(*args)
-    params.require(:post).permit(:title, :content, :post_date, :author_name)
+    params.require(:post).permit(:title, :content, :post_date, :author_name, :comments => [])
   end
 end
