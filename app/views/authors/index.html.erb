@@ -3,25 +3,6 @@
   <% @authors.each.with_index(1) do |author, i| %>
     <h3><%= i %>. Name: <%= link_to author.name, author_path(author) %></h3>
 
-    <% author.posts.each do |post| %>
-
-    <button class="js-show btn" data-id="<%= post.id %>">See Posts By <%= author.name %></button>
-
-      <h4 id="postTitle-<%= post.id %>"></h4>
-      <p id="postContent-<%= post.id %>"></p>
-
-    <% end %>
   <% end %>
-</div>
 
-<script type="text/javascript" charset="utf-8">
-$(function () {
-  $(".js-show").on('click', function() {
-    var id = $(this).data("id");
-    $.get("/posts/" + id + "/post_data", function(data) {
-      $("#postTitle-" + id).html(data["title"]);
-      $("#postContent-" + id).html(data["content"]);
-    });
-  });
-});
-</script>
+</div>
