@@ -5,7 +5,7 @@
     <p><%= link_to "Edit", edit_post_path(@post) %> |
     <%= link_to "Delete", @post, method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %> | <%= link_to "Home", root_path %></p>
 
-    <div class="authorName">By: <%= @post.author.name %></div>
+    <div class="authorName">By: <%= link_to @post.author.name, author_path(@post.author) %></div>
     <a href="#" class="js-next" data-id="<%=@post.id%>">Next...</a>
     <h1 class="postTitle"><%= @post.title %></h1>
     <p class="postBody"><%= @post.content %></p>
@@ -15,7 +15,6 @@
     <script type="text/javascript" charset="utf-8">
     $(function () {
       $(".js-next").on("click", function() {
-
         var nextId = parseInt($(".js-next").attr("data-id")) + 1;
         $.get("/posts/" + nextId + ".json", function(data) {
           var post = data["post"];
@@ -23,7 +22,6 @@
 
           $(".postTitle").text(data["title"]);
           $(".postBody").text(data["content"]);
-          debugger
           // re-set the id to current on the link
           $(".js-next").attr("data-id", data["id"]);
         });
@@ -44,13 +42,11 @@
           event.preventDefault();
 
           var values = $(this).serialize();
-
           var commenting = $.post('/comments', values);
-
           commenting.done(function(data) {
             var comment = data["content"];
 
-            $("#commentBody").text(comment);
+            $("#commentBody").append(comment);
           });
         });
       });

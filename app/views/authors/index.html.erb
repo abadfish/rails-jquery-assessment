@@ -2,7 +2,5 @@
   <h1>All Authors</h1>
   <% @authors.each.with_index(1) do |author, i| %>
     <h3><%= i %>. Name: <%= link_to author.name, author_path(author) %></h3>
-
   <% end %>
-
 </div>
