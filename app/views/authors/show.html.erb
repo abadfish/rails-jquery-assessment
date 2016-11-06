@@ -6,7 +6,6 @@
   <% @author.posts.each do |post| %>
     <h4 id="postTitle"></h4>
     <p id="postContent"></p>
-
   <% end %>
 
   <script type="text/javascript" charset="utf-8">
@@ -19,7 +18,6 @@
         var title = posts[i]["title"];
         var content = posts[i]["content"];
       };
-
         $("#postTitle").html(title);
         $("#postContent").html(content);
       });
