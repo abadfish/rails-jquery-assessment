@@ -22,7 +22,7 @@ class AuthorsController < ApplicationController
 
   def author_data
     author = Author.find(params[:id])
-    render json: author.to_json(only: [:name, :hometown, :id], include: [posts: {only: [:title, :content]}])
+    render json: author
   end
 
   def edit
